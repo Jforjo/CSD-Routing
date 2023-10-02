@@ -18,16 +18,16 @@ $exchangeRates = array(
     ),
     "EUR" => array(
         "USD" => 1.05,
-        "EUR" => 0.87
+        "GBP" => 0.87
     )
 );
 
 function CurrencyConverter($from, $to, $value) {
-    if (!array_key_exists($from, $exchangeRates)) return false;
+    if (!array_key_exists(strtoupper($from), $exchangeRates)) return false;
     // if (!array_key_exists($to, array_column($exchangeRates, $from))) return false;
-    if (!array_key_exists($to, $exchangeRates[$from])) return false;
+    if (!array_key_exists(strtoupper($to), $exchangeRates[strtoupper($from)])) return false;
 
-    return $value * $exchangeRates[$to][$from];
+    return $value * $exchangeRates[strtoupper($to)][strtoupper($from)];
 }
 
 ?>

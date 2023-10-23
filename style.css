@@ -1,3 +1,19 @@
+:root {
+    --g1: hsl(265, 100%, 46%);
+    --g2: hsl(340, 82%, 59%);
+    --theme: hsl(170, 92%, 35%);
+    --theme-hover: hsl(170, 92%, 30%);
+    --txt: #666;
+    --txt-focus: #42509e;
+}
+@keyframes background-pan {
+    from {
+        background-position: 0% center;
+    }
+    to {
+        background-position: -200% center;
+    }
+}
 * {
     margin: 0;
     padding: 0;
@@ -5,14 +21,80 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 body {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    background: linear-gradient(
+        to right,
+        var(--g1),
+        var(--g2),
+        var(--g1)
+    );
+    background-size: 200%;
+    overflow: hidden;
+    animation: background-pan 10s linear infinite;
+}
+body.toggled {
+    animation: none;
+}
+body.toggled > #tiles > .tile:hover {
+    opacity: 0.1 !important;
+}
+body.toggled .text {
+    opacity: 1;
+}
+#tiles {
+    position: relative;
+    z-index: 2;
+    height: calc(100vh - 1px);
+    height: calc(100svh - 1px);
+    width: calc(100vw - 1px);
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+}
+#tiles .tile {
+    position: relative;
+    cursor: pointer;
+}
+#tiles .tile:hover::before {
+    background: rgb(30, 30, 30);
+}
+#tiles .tile::before {
+    content: '';
+    position: absolute;
+    inset: 0.5px;
+    background: rgb(15, 15, 15);
+}
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: clamp(256px, 50vw, calc(100vw - 10px));
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    min-height: 100svh;
-    background: #ffffff;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.75s ease;
+}
+.text span {
+    color: rgba(255,255,255,0.16);
+    font-weight: 600;
+    font-size: 2em;
+    text-transform: uppercase;
+}
+.text span:first-child {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 16px;
 }
 form[name="calculator"] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
     background: #eeeeee;
     border-radius: 16px;
     /* 32px is the padding */
@@ -23,6 +105,8 @@ form[name="calculator"] {
     align-items: center;
     flex-direction: column;
     padding: 16px;
+    z-index: 10;
+    transition: opacity 0.5s;
 }
 form[name="calculator"] input[name="answer"] {
     width: 100%;

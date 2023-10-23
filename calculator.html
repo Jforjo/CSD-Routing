@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <script defer src="include/anime.min.js"></script>
+    <script defer src="script.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form action="#" name="calculator">
+    <div id="tiles"></div>
+    <div class="text">
+        <span>Website Created By</span>
+        <span>Chris Norman</span>
+        <span>Gauravi Chodancar</span>
+        <span>Josh Holmes</span>
+        <span>Mikael Thomas</span>
+    </div>
+    <form action="#" name="calculator" id="calculator">
         <input type="text" name="answer">
         <div class="keys">
             <input type="button" value="AC" onclick="calculator.answer.value='';">

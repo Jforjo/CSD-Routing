@@ -79,7 +79,7 @@ window.onresize = () => createGrid();
 
 
 function Converter(exchangesRates) {
-	exchangesRates = exchangesRates;
+	this.exchangesRates = exchangesRates;
 }
 Converter.prototype = {
 	celcius: {
@@ -95,9 +95,9 @@ Converter.prototype = {
 		toCelcius: (num) => num - 273.15
 	},
 	currency: function(from, to, num) {
-		if (exchangesRates[from] == undefined) return;
-		if (exchangesRates[from][to] == undefined) return;
-		return exchangesRates[from][to] * num;
+		if (this.exchangesRates[from] == undefined) return;
+		if (this.exchangesRates[from][to] == undefined) return;
+		return this.exchangesRates[from][to] * num;
 	}
 }
 let exchangesRates = {
@@ -114,4 +114,4 @@ let exchangesRates = {
         "GBP": 0.87
     }
 }
-let converter = Converter(exchangesRates);
+let converter = new Converter(exchangesRates);

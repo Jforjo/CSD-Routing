@@ -75,3 +75,43 @@ const createGrid = () => {
 createGrid();
 
 window.onresize = () => createGrid();
+
+
+
+function Converter(exchangesRates) {
+	exchangesRates = exchangesRates;
+}
+Converter.prototype = {
+	celcius: {
+		toFahrenheit: (num) => num * 1.8 + 32,
+		toKelvin: (num) => num + 273.15
+	},
+	fahrenheit: {
+		toCelcius: (num) => (num - 32) / 1.8,
+		toKelvin: (num) => (num - 32) / 1.8 + 273.15
+	},
+	kelvin: {
+		toFahrenheit: (num) => (num - 273.15) * 1.8 + 32,
+		toCelcius: (num) => num - 273.15
+	},
+	currency: function(from, to, num) {
+		if (exchangesRates[from] == undefined) return;
+		if (exchangesRates[from][to] == undefined) return;
+		return exchangesRates[from][to] * num;
+	}
+}
+let exchangesRates = {
+    "USD": {
+        "GBP": 0.82,
+        "EUR": 0.95
+    },
+    "GBP": {
+        "USD": 1.21,
+        "EUR": 1.16
+    },
+    "EUR": {
+        "USD": 1.05,
+        "GBP": 0.87
+    }
+}
+let converter = Converter(exchangesRates);

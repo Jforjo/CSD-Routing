@@ -1,13 +1,13 @@
 <?php
-echo $_GET['url'];
+
 switch ($_GET['url']) {
-    case '/':
+    case '':
         include_once(__DIR__ . '/index.php');
         break;
-    case '/calculator':
+    case 'calculator':
         include_once(__DIR__ . '/calculator.php');
         break;
-    case '/currencyconverter':
+    case 'currencyconverter':
         include_once(__DIR__ . '/currencyconverter.php');
         break;
     default:
